@@ -125,10 +125,10 @@ pub trait CommandExt: CommandExtCheck + CommandExtLog + CommandExtTrace {}
 pub trait CommandExt: CommandExtCheck + CommandExtLog {}
 
 #[cfg(all(feature = "check", not(feature = "log"), feature = "tracing"))]
-pub trait CommandExt: CommandExtCheck + CommandExtTracing {}
+pub trait CommandExt: CommandExtCheck + CommandExtTrace {}
 
 #[cfg(all(not(feature = "check"), feature = "log", feature = "tracing"))]
-pub trait CommandExt: CommandExtLog + CommandExtTracing {}
+pub trait CommandExt: CommandExtLog + CommandExtTrace {}
 
 #[cfg(all(feature = "check", not(feature = "log"), not(feature = "tracing")))]
 pub trait CommandExt: CommandExtCheck {}
@@ -137,4 +137,4 @@ pub trait CommandExt: CommandExtCheck {}
 pub trait CommandExt: CommandExtLog {}
 
 #[cfg(all(not(feature = "check"), not(feature = "log"), feature = "tracing"))]
-pub trait CommandExt: CommandExtTracing {}
+pub trait CommandExt: CommandExtTrace {}

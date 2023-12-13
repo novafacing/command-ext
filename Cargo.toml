@@ -3,7 +3,7 @@
 
 [package]
 name = "command-ext"
-authors = ["Rowan Hart <rowan.hart@intel.com>"]
+authors = ["Rowan Hart <rowanbhart@gmail.com>"]
 description = "Extension traits for std::process::Command"
 edition = "2021"
 license = "Apache-2.0"

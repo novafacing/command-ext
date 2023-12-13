@@ -22,9 +22,9 @@ use std::{ffi::OsStr, process::Command};
 use tracing::{debug, error, info, trace, warn, Level};
 use typed_builder::TypedBuilder;
 
+use crate::{wrap::HasCommand, CommandWrap};
 #[cfg(feature = "check")]
-use crate::CommandExtCheck;
-use crate::{wrap::HasCommand, CommandExtError, CommandWrap};
+use crate::{CommandExtCheck, CommandExtError};
 
 #[derive(TypedBuilder, Debug)]
 pub struct CommandTrace<'a> {
