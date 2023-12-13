@@ -96,12 +96,17 @@
 //! 2023-12-13T21:06:31.741138Z TRACE command_ext::trace: stdout: ok
 //! 2023-12-13T21:06:31.741147Z  WARN command_ext::trace: stderr: err
 //! ```
+//!
+//! ## CommandWrap
+//!
+//! For other cases where you might want to hook into what `Command` is doing, you can use
+//! `CommandWrap` to implement your own wrappers. See the examples for more details.
 
 pub mod error;
 pub use error::CommandExtError;
 
 pub mod wrap;
-pub use wrap::CommandWrap;
+pub use wrap::{CommandWrap, HasCommand};
 
 #[cfg(feature = "check")]
 pub mod check;
