@@ -1,0 +1,30 @@
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+[package]
+name = "command-ext"
+authors = ["Rowan Hart <rowan.hart@intel.com>"]
+description = "Extension traits for std::process::Command"
+edition = "2021"
+license = "Apache-2.0"
+publish = false
+repository = "https://github.com/novafacing/command-ext"
+version = "0.1.0"
+
+[dependencies]
+thiserror = "1.0.48"
+tracing = { version = "0.1.40", optional = true, features = ["log"] }
+log = { version = "0.4.20", optional = true }
+typed-builder = "0.18.0"
+
+[features]
+default = ["tracing", "check", "log"]
+tracing = ["dep:tracing"]
+check = []
+log = ["dep:log"]
+
+[dev-dependencies]
+anyhow = "1.0.75"
+env_logger = "0.10.1"
+test-log = { version = "0.2.14", features = ["trace"] }
+tracing-subscriber = "0.3.18"
