@@ -96,3 +96,12 @@ This traces:
 2023-12-13T21:06:31.741138Z TRACE command_ext::trace: stdout: ok
 2023-12-13T21:06:31.741147Z  WARN command_ext::trace: stderr: err
 ```
+
+## CommandWrap
+
+For other cases where you might want to hook into what `Command` is doing, you can use
+`CommandWrap` to implement your own wrappers. For example, let's say you want to
+wrap the `Command` type so it prints a message when it executes:
+
+```rust
+use command_ext::CommandExtWrap;
