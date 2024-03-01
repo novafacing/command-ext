@@ -118,28 +118,40 @@ pub mod log;
 #[cfg(feature = "log")]
 pub use log::CommandExtLog;
 
+#[cfg(feature = "print")]
+pub mod print;
+#[cfg(feature = "print")]
+pub use print::CommandExtPrint;
+
 #[cfg(feature = "tracing")]
 pub mod trace;
 #[cfg(feature = "tracing")]
 pub use trace::CommandExtTrace;
 
-#[cfg(all(feature = "check", feature = "log", feature = "tracing"))]
+#[cfg(all(feature = "check", feature = "log", feature = "print", feature = "tracing"))]
+pub trait CommandExt: CommandExtCheck + CommandExtLog + CommandExtPrint + CommandExtTrace {}
+
+#[cfg(all(feature = "check", feature = "log", feature = "print", not(feature = "tracing")))]
+pub trait CommandExt: CommandExtCheck + CommandExtLog + CommandExtPrint {}
+
+#[cfg(all(feature = "check", not(feature = "log"), feature = "print", feature = "tracing"))]
+pub trait CommandExt: CommandExtCheck + CommandExtPrint + CommandExtTrace {}
+
+#[cfg(all(feature = "check", feature = "log", not(feature = "print"), feature = "tracing"))]
 pub trait CommandExt: CommandExtCheck + CommandExtLog + CommandExtTrace {}
 
-#[cfg(all(feature = "check", feature = "log", not(feature = "tracing")))]
-pub trait CommandExt: CommandExtCheck + CommandExtLog {}
+#[cfg(all(not(feature = "check"), feature = "log", feature = "print", feature = "tracing"))]
+pub trait CommandExt: CommandExtLog + CommandExtPrint + CommandExtTrace {}
 
-#[cfg(all(feature = "check", not(feature = "log"), feature = "tracing"))]
-pub trait CommandExt: CommandExtCheck + CommandExtTrace {}
-
-#[cfg(all(not(feature = "check"), feature = "log", feature = "tracing"))]
-pub trait CommandExt: CommandExtLog + CommandExtTrace {}
-
-#[cfg(all(feature = "check", not(feature = "log"), not(feature = "tracing")))]
+#[cfg(all(feature = "check", not(feature = "log"), not(feature = "print"), not(feature = "tracing")))]
 pub trait CommandExt: CommandExtCheck {}
 
-#[cfg(all(not(feature = "check"), feature = "log", not(feature = "tracing")))]
+#[cfg(all(not(feature = "check"), feature = "log", not(feature = "print"), not(feature = "tracing")))]
 pub trait CommandExt: CommandExtLog {}
 
-#[cfg(all(not(feature = "check"), not(feature = "log"), feature = "tracing"))]
+#[cfg(all(not(feature = "check"), not(feature = "log"), feature = "print", not(feature = "tracing")))]
+pub trait CommandExt: CommandExtPrint {}
+
+#[cfg(all(not(feature = "check"), not(feature = "log"), not(feature = "print"), feature = "tracing"))]
 pub trait CommandExt: CommandExtTrace {}
+
